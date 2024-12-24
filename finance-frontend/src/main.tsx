@@ -1,0 +1,12 @@
+// src/main.tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./assets/tailwind.css";
+import App from "./App";
+import { ChakraProvider } from "@chakra-ui/react";
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <ChakraProvider>
+    <App />
+  </ChakraProvider>
+);
