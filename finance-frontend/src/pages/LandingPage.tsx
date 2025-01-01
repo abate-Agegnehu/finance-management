@@ -10,20 +10,27 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion"; 
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
 
+  const MotionCard = motion(Card);
+  const MotionBox = motion(Box);
+
   return (
-    <Box
+    <MotionBox
       bg="gray.50"
       display="flex"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
       padding="8"
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 0.8 }} 
     >
-      <Heading size="2xl" color="teal.500" textAlign="center" >
+      <Heading size="2xl" color="teal.500" textAlign="center">
         Manage Your Finances with Ease
       </Heading>
 
@@ -32,18 +39,21 @@ const LandingPage: React.FC = () => {
         gap="8"
         width="100%"
         w="full"
-        alignItems="stretch" 
+        alignItems="stretch"
         padding="20px"
       >
-        <Card
+        <MotionCard
           w="full"
-          h="full" 
+          h="full"
           maxW="400%"
           border="1px solid"
           borderColor="gray.200"
           p={{ base: "6", md: "8" }}
           borderRadius="md"
           boxShadow="md"
+          initial={{ y: 20, opacity: 0 }} 
+          animate={{ y: 0, opacity: 1 }} 
+          transition={{ duration: 0.8, delay: 0.2 }} 
         >
           <CardBody>
             <VStack
@@ -74,9 +84,9 @@ const LandingPage: React.FC = () => {
               </Button>
             </VStack>
           </CardBody>
-        </Card>
+        </MotionCard>
 
-        <Card
+        <MotionCard
           w="full"
           h="full"
           maxW="400%"
@@ -85,6 +95,9 @@ const LandingPage: React.FC = () => {
           p={{ base: "6", md: "8" }}
           borderRadius="md"
           boxShadow="md"
+          initial={{ y: 20, opacity: 0 }} 
+          animate={{ y: 0, opacity: 1 }} 
+          transition={{ duration: 1, delay: 0.6 }} 
         >
           <CardBody>
             <Heading size="lg" color="teal.500" mb="4">
@@ -103,9 +116,9 @@ const LandingPage: React.FC = () => {
               Get Started
             </Button>
           </CardBody>
-        </Card>
+        </MotionCard>
       </Grid>
-    </Box>
+    </MotionBox>
   );
 };
 

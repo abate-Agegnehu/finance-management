@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Box,
@@ -11,6 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "../services/api";
+import { motion } from "framer-motion"; 
+
+const MotionBox = motion(Box);
+const MotionVStack = motion(VStack); 
 
 interface FormData {
   username: string;
@@ -64,7 +67,7 @@ const SignUpPage: React.FC = () => {
   };
 
   return (
-    <Box
+    <MotionBox
       bg="white"
       p="8"
       maxW="md"
@@ -72,9 +75,17 @@ const SignUpPage: React.FC = () => {
       mt="10"
       shadow="md"
       borderRadius="lg"
+      initial={{ opacity: 0, y: 20 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      transition={{ duration: 0.8 }} 
     >
       <form onSubmit={handleSubmit}>
-        <VStack spacing="4">
+        <MotionVStack
+          spacing="4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }} 
+          transition={{ duration: 1 }}
+        >
           <FormControl isRequired>
             <FormLabel>Username</FormLabel>
             <Input
@@ -114,9 +125,9 @@ const SignUpPage: React.FC = () => {
           <Button colorScheme="teal" type="submit" width="full">
             Sign Up
           </Button>
-        </VStack>
+        </MotionVStack>
       </form>
-    </Box>
+    </MotionBox>
   );
 };
 
