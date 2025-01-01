@@ -1,6 +1,5 @@
 const Transaction = require("../models/Transaction");
 
-// Add a new transaction
 exports.addTransaction = async (req, res) => {
   const { description, amount, date } = req.body;
   try {
@@ -8,7 +7,7 @@ exports.addTransaction = async (req, res) => {
       description,
       amount,
       date,
-      userId: req.user.id, // From JWT token
+      userId: req.user.id, 
     });
 
     await newTransaction.save();
@@ -18,7 +17,6 @@ exports.addTransaction = async (req, res) => {
   }
 };
 
-// Get all transactions for the logged-in user
 exports.getTransactions = async (req, res) => {
   try {
     const transactions = await Transaction.find({ userId: req.user.id });
@@ -27,5 +25,16 @@ exports.getTransactions = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error fetching transactions", error: err });
+  }
+};
+
+
+exports.getBalance = async (req, res) => {
+  try {
+    const transactions = await Transaction.find({ userId: req.user.id });
+    const balance = transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
+    res.status(200).json({ balance });
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching balance", error: err });
   }
 };

@@ -1,7 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
-// Register user
 exports.registerUser = async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -13,7 +12,6 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-// Login user
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {

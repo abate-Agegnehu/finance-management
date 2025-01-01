@@ -3,17 +3,17 @@ const { registerUser, loginUser } = require("../controllers/authController");
 const {
   addTransaction,
   getTransactions,
+  getBalance,
 } = require("../controllers/transactionController");
 const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Auth Routes
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
-// Transaction Routes (Protected)
 router.post("/transactions", protect, addTransaction);
 router.get("/transactions", protect, getTransactions);
+router.get("/balance", protect, getBalance);
 
 module.exports = router;
