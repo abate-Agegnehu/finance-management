@@ -1,50 +1,85 @@
-# React + TypeScript + Vite
+                Finance Management 
+Overview
+This project is the Frontend for a Finance Management System built with Vite, React, TypeScript, Chakra UI, and Tailwind CSS. It offers a user-friendly interface for managing finances with features such as authentication, transaction management, and a responsive dashboard.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+             Features:
 
-Currently, two official plugins are available:
+Landing Page: A responsive and visually appealing page with a navigation bar, app description, and call-to-action buttons (Sign Up, Login).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+             Authentication Pages:
 
-## Expanding the ESLint configuration
+Sign Up: Includes form fields for username, email, password, and confirm password, with form validation.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Login: Form fields for email and password with input validation.
 
-- Configure the top-level `parserOptions` property like this:
+               Dashboard:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Displays the current user balance and recent transactions.
+Allows users to add new transactions.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Responsive Design: Optimized for mobile, tablet, and desktop screens using Chakra UI and Tailwind CSS.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+                   Setup Instructions
+           Clone the repository:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+bash
+Copy code
+git clone https://github.com/abate-Agegnehu/finance-management.git
+Navigate into the project folder:
+
+bash
+Copy code
+cd finance-frontend
+Install dependencies: Make sure you have Node.js installed on your system, then run:
+
+bash
+Copy code
+npm install
+Run the development server: Start the development server with Vite:
+
+bash
+Copy code
+npm run dev
+The application will be available at http://localhost:5173/.
+
+Build for production: To create a production build of the app, run:
+
+bash
+Copy code
+npm run build
+Preview the production build: After building the project, preview it locally:
+
+bash
+Copy code
+npm run preview
+
+           Project Structure
+
+src: Contains all source code files.
+components: Reusable UI components like BalanceWidget,Dashboard,Header,RecentTransactions,TransactionForm.
+pages: Landing, Sign Up, Login, and Dashboard pages.
+services: Contains API services for interacting with the backend.
+App.tsx: Main application component.
+index.tsx: Entry point for the React application.
+
+
+                      Dependencies
+
+           Core Dependencies:
+
+@chakra-ui/react: For accessible and customizable UI components.
+@emotion/react & @emotion/styled: Used for Chakra UI styling.
+axios: To handle HTTP requests for interacting with the backend.
+framer-motion: Provides animations for UI elements.
+react: The core library for building user interfaces.
+react-dom: React's DOM bindings for the browser.
+react-router-dom: For routing and navigation between pages.
+
+           Development Dependencies:
+
+vite: Fast build tool and development server.
+typescript: TypeScript for type safety and better code management.
+eslint: Linter to maintain code quality.
+@vitejs/plugin-react: React support for Vite.
+typescript-eslint: TypeScript-specific linting rules.
+eslint-plugin-react-hooks: Linting plugin for R
