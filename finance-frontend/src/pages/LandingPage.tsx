@@ -1,5 +1,14 @@
 import React from "react";
-import { Box, Button, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Text,
+  Grid,
+  Card,
+  CardBody,
+  VStack,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage: React.FC = () => {
@@ -8,37 +17,94 @@ const LandingPage: React.FC = () => {
   return (
     <Box
       bg="gray.50"
-      h="100vh"
       display="flex"
+      flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      p="8"
+      padding="8"
     >
-      <VStack spacing="6" textAlign="center">
-        <Heading size="2xl" color="teal.500">
-          Welcome to Finance Manager
-        </Heading>
-        <Text fontSize="lg" color="gray.600">
-          Manage your finances efficiently and effectively with our easy-to-use
-          dashboard.
-        </Text>
-        <VStack spacing="4">
-          <Button
-            colorScheme="teal"
-            size="lg"
-            onClick={() => navigate("/signup")}
-          >
-            Get Started
-          </Button>
-          <Button
-            variant="outline"
-            colorScheme="teal"
-            onClick={() => navigate("/login")}
-          >
-            Learn More
-          </Button>
-        </VStack>
-      </VStack>
+      <Heading size="2xl" color="teal.500" textAlign="center" >
+        Manage Your Finances with Ease
+      </Heading>
+
+      <Grid
+        templateColumns={{ base: "1fr", md: "1fr 1fr" }}
+        gap="8"
+        width="100%"
+        w="full"
+        alignItems="stretch" 
+        padding="20px"
+      >
+        <Card
+          w="full"
+          h="full" 
+          maxW="400%"
+          border="1px solid"
+          borderColor="gray.200"
+          p={{ base: "6", md: "8" }}
+          borderRadius="md"
+          boxShadow="md"
+        >
+          <CardBody>
+            <VStack
+              align="start"
+              spacing="4"
+              color="gray.600"
+              fontSize={{ base: "sm", md: "md" }}
+            >
+              <Text fontSize="lg" color="gray.600" mb="4">
+                Stay on top of your financial health with our intuitive finance
+                management dashboard. Track your income, expenses, and balance
+                all in one place. Sign up today to gain insights into your
+                spending habits and easily manage your transactions.
+              </Text>
+
+              <Text>• Effortlessly add and track your transactions.</Text>
+              <Text>• Get real-time updates on your current balance.</Text>
+              <Text>
+                • Access your financial data securely with authentication.
+              </Text>
+              <Button
+                variant="outline"
+                colorScheme="teal"
+                onClick={() => navigate("/login")}
+                width="full"
+              >
+                Learn More
+              </Button>
+            </VStack>
+          </CardBody>
+        </Card>
+
+        <Card
+          w="full"
+          h="full"
+          maxW="400%"
+          border="1px solid"
+          borderColor="gray.200"
+          p={{ base: "6", md: "8" }}
+          borderRadius="md"
+          boxShadow="md"
+        >
+          <CardBody>
+            <Heading size="lg" color="teal.500" mb="4">
+              Start Today!
+            </Heading>
+            <Text fontSize="lg" color="gray.600" mb="4">
+              Join now and experience seamless finance management. Securely
+              track your transactions and get insights into your spending.
+            </Text>
+            <Button
+              colorScheme="teal"
+              size="lg"
+              onClick={() => navigate("/signup")}
+              width="full"
+            >
+              Get Started
+            </Button>
+          </CardBody>
+        </Card>
+      </Grid>
     </Box>
   );
 };
