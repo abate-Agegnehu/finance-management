@@ -34,7 +34,7 @@ const Header: React.FC = () => {
       align="center"
     >
       <Heading as="h1" size="lg" color="teal.500">
-        Finance Manager
+        Easy Finance
       </Heading>
 
       {isMobile ? (
