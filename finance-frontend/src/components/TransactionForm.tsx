@@ -10,12 +10,19 @@ import {
 } from "@chakra-ui/react";
 import { addTransaction } from "../services/api";
 
+interface FormData {
+  description: string;
+  amount: string;
+  date: string;
+}
+
 const TransactionForm: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     description: "",
     amount: "",
     date: "",
   });
+
   const toast = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,30 +30,43 @@ const TransactionForm: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  try {
-    // Convert amount to number
-    const transactionData = {
-      ...formData,
-      amount: parseFloat(formData.amount),
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    await addTransaction(transactionData);
-    toast({
-      title: "Transaction added successfully!",
-      status: "success",
-      duration: 3000,
-    });
-    setFormData({ description: "", amount: "", date: "" });
-  } catch (error) {
-    toast({
-      title: "Error adding transaction.",
-      status: "error",
-      duration: 3000,
-    });
-  }
-};
+    if (!formData.description || !formData.amount || !formData.date) {
+      toast({
+        title: "All fields are required!",
+        status: "error",
+        duration: 3000,
+      });
+      return;
+    }
+
+    try {
+      const transactionData = {
+        ...formData,
+        amount: parseFloat(formData.amount),
+      };
+
+      await addTransaction(transactionData);
+
+      toast({
+        title: "Transaction added successfully!",
+        status: "success",
+        duration: 3000,
+      });
+
+      setFormData({ description: "", amount: "", date: "" });
+
+      window.location.reload();
+    } catch (error) {
+      toast({
+        title: "Error adding transaction.",
+        status: "error",
+        duration: 3000,
+      });
+    }
+  };
 
   return (
     <Box p="6" shadow="md" borderWidth="1px" borderRadius="lg" bg="white">
@@ -61,6 +81,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               onChange={handleChange}
             />
           </FormControl>
+
           <FormControl isRequired>
             <FormLabel>Amount</FormLabel>
             <Input
@@ -70,6 +91,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               onChange={handleChange}
             />
           </FormControl>
+
           <FormControl isRequired>
             <FormLabel>Date</FormLabel>
             <Input
@@ -79,6 +101,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               onChange={handleChange}
             />
           </FormControl>
+
           <Button type="submit" colorScheme="teal">
             Add Transaction
           </Button>

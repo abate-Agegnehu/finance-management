@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Box, Heading, Text, Spinner } from "@chakra-ui/react";
 import axios from "axios";
 
+interface BalanceResponse {
+  balance: number;
+}
+
 const BalanceWidget: React.FC = () => {
   const [balance, setBalance] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchBalance = async () => {
+    const fetchBalance = async (): Promise<void> => {
       const token = localStorage.getItem("token");
 
       if (!token) {
@@ -17,11 +21,14 @@ const BalanceWidget: React.FC = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:5000/api/balance", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get<BalanceResponse>(
+          "http://localhost:5000/api/balance",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setBalance(response.data.balance);
       } catch (error) {
         console.error("Error fetching balance:", error);

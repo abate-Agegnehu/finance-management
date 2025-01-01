@@ -1,3 +1,6 @@
+
+
+
 import React, { useState } from "react";
 import {
   Box,
@@ -12,12 +15,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const toast = useToast();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:5000/api/login", {
@@ -26,7 +31,6 @@ const LoginPage: React.FC = () => {
       });
       const { token } = response.data;
 
-      // Store token in localStorage
       localStorage.setItem("token", token);
 
       toast({
