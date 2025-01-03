@@ -1,59 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { Box, Heading, Text, Spinner } from "@chakra-ui/react";
-import axios from "axios";
+  import React, { useEffect, useState } from "react";
+  import { Box, Heading, Text, Spinner } from "@chakra-ui/react";
+  import axios from "axios";
 
-interface BalanceResponse {
-  balance: number;
-}
+  interface BalanceResponse {
+    balance: number;
+  }
 
-const BalanceWidget: React.FC = () => {
-  const [balance, setBalance] = useState<number | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const BalanceWidget: React.FC = () => {
+    const [balance, setBalance] = useState<number | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    const fetchBalance = async (): Promise<void> => {
-      const token = localStorage.getItem("token");
+    useEffect(() => {
+      const fetchBalance = async (): Promise<void> => {
+        const token = localStorage.getItem("token");
 
-      if (!token) {
-        console.error("No token found, please login.");
-        setLoading(false);
-        return;
-      }
+        if (!token) {
+          console.error("No token found, please login.");
+          setLoading(false);
+          return;
+        }
 
-      try {
-        const response = await axios.get<BalanceResponse>(
-          "http://localhost:5000/api/balance",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setBalance(response.data.balance);
-      } catch (error) {
-        console.error("Error fetching balance:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+        try {
+          const response = await axios.get<BalanceResponse>(
+            "http://localhost:5000/api/balance",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setBalance(response.data.balance);
+        } catch (error) {
+          console.error("Error fetching balance:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    fetchBalance();
-  }, []);
+      fetchBalance();
+    }, []);
 
-  return (
-    <Box p="6" shadow="md" borderWidth="1px" borderRadius="lg" bg="white">
-      <Heading size="md" mb="4">
-        Current Balance
-      </Heading>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <Text fontSize="2xl" color="teal.600">
-          ${balance?.toFixed(2)}
-        </Text>
-      )}
-    </Box>
-  );
-};
+    return (
+      <Box p="6" shadow="md" borderWidth="1px" borderRadius="lg" bg="white">
+        <Heading size="md" mb="4">
+          Current Balance
+        </Heading>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <Text fontSize="2xl" color="teal.600">
+            ${balance?.toFixed(2)}
+          </Text>
+        )}
+      </Box>
+    );
+  };
 
-export default BalanceWidget;
+  export default BalanceWidget;
